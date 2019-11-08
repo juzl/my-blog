@@ -1,7 +1,7 @@
 ---
 title: "使用 Hugo + GitHub Pages + Travis CI 搭建个人博客"
 date: 2019-11-07T16:06:33+08:00
-description: 
+description: 明确关键点，通过最直接的方式使用 Hugo 搭建自己的博客~
 categories:
 - Hugo
 tags:
@@ -11,10 +11,6 @@ tags:
 categories:
 - Hugo
 ---
-
-通过最直接的方式使用 Hugo 搭建自己的博客
-
-明确关键点，通过最直接的方式使用 Hugo 搭建自己的博客~
 
 <!--more-->
 
