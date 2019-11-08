@@ -14,11 +14,19 @@ categories:
 
 通过最直接的方式使用 Hugo 搭建自己的博客
 
+明确关键点，通过最直接的方式使用 Hugo 搭建自己的博客~
+
 <!--more-->
 
-官方地址：[https://gohugo.io/](https://gohugo.io/)
+关于什么是 Hugo 、为什么选择 Hugo 和 Github Pages，可以通过底部的参考文章或者网上搜索资料了解，这些都不是本文的重点，本文的主要目的在于将整个搭建过程的重要节点进行梳理，帮助大家完整快速的部署自己的博客。
+
+Hugo 版本：v0.59.0
+
+Hugo 官方地址：[https://gohugo.io/](https://gohugo.io/)
 
 Github 地址：[https://github.com/gohugoio/hugo](https://github.com/gohugoio/hugo)
+
+本次项目搭建的仓库地址：[https://github.com/juzl/my-blog](https://github.com/juzl/my-blog)
 
 ## Hugo 的安装与使用 (Windows 环境下)
 
@@ -83,13 +91,13 @@ hugo new post/my-first-blog.md
 # 预览测试，在浏览器 http://localhost:1313 端访问本地服务
 hugo server -D
 
-# 测试没有问题后可以使用 hugo 命令进行发布，但由于要使用 Travis CI 的自动部署功能，所以本阶段准备暂时结束
+# 测试没有问题后可以使用下面的命令进行发布，由于将要使用 Travis CI 的自动部署功能，所以本阶段准备暂时结束
 hugo
 ```
 
 ## 部署到 Github Pages 与 Travis CI 自动部署
 
-> 注意：采用两个项目仓库的方式进行自动部署
+> 注意：本次搭建工作采用两个项目仓库的方式进行自动部署
 
 ### 建立代码仓库
 
@@ -104,27 +112,27 @@ C --> |push| D(username.github.io 仓库)
 
 ### 申请 Token
 
-在 [https://github.com/settings/tokens](https://github.com/settings/tokens ) 页面申请 Token，填写任意名字的注释，只需要勾选 `repo` 内容，点击页面最下方的  `Generate token` 生成 Token
+在 [https://github.com/settings/tokens](https://github.com/settings/tokens ) 页面申请 Token，填写任意名字的注释，只需要勾选 `repo` 内容，点击页面最下方的  `Generate token` 生成 `Token`。
 
 ![](https://i.loli.net/2019/11/07/wupgsJ6byijOxev.png)
 
-复制  `Token`，注意离开这个页面之后无法再次查该 `Token`
+复制这个  `Token`，为设置 Travis 做准备。
+
+> 注意：离开这个页面之后无法再次查该 `Token`
 
 ![](https://i.loli.net/2019/11/07/dURmlkjbaCwD5VE.png)
 
 ### 设置 Travis CI
 
-打开 Travis CI 官方网站 https://travis-ci.com/](https://travis-ci.com/)， 使用 GitHub 帐号登录
-
-https://travis-ci.com/account/repositories， 选择需要托管的仓库
+打开 Travis CI 官方网站 https://travis-ci.com/](https://travis-ci.com/)， 使用 GitHub 帐号登录，选择需要托管的仓库。
 
 ![](https://i.loli.net/2019/11/07/H7UutMlCoj2EpOs.png)
 
-点击 `Settings` ，在 `Environment Variables` 中填写刚才复制的 Token，变量名随意
+点击 `Settings` ，在 `Environment Variables` 中填写刚才复制的 ·`Token`，变量名任意。
 
 ![](https://i.loli.net/2019/11/07/4Tpt8Y2FUukyiE3.png)
 
-### 添加配置文件 `.travis.yml`
+### 添加配置文件
 
 在 myblog 目录下新增 `.travis.yml` 作为自动部署的配置脚本，其中 `${GITHUB_TOKEN}` 和 `${GITHUB_REF}` 可以根据自定义的变量名进行替换。
 
@@ -158,20 +166,19 @@ env:
    - GITHUB_REF: github.com/juzl/juzl.github.io
 ```
 
-上述操作完成后，将 `myblog` 项目 push 至 Github 仓库，等待 Travis CI 自动部署完成后浏览器输入 `https://username.github.io` 即可访问搭建好的博客
+添加完配置文件后，将 `myblog` 项目 push 至 Github 仓库，等待 Travis CI 的自动部署完成。
 
 ![](https://i.loli.net/2019/11/07/4SRnwQzgCj7l9UH.png)
 
-## 附录
-
-- `myblog` 项目中添加  `.gitignore` 文件
+> 注意：建议在项目中添加  `.gitignore` 文件，忽略不需要上传的目录。
 
 ```
 public/*
 ```
 
-- 我的项目地址：https://github.com/juzl/my-blog
-- 安装 Valine 评论系统，参考文章：https://www.smslit.top/2018/07/08/hugo-valine/
+浏览器输入 `https://username.github.io` 访问搭建完成的博客。
+
+![](https://i.loli.net/2019/11/08/Cb72URKG3Lhuajl.png)
 
 ## 参考文章：
 
