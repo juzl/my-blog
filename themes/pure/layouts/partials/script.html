@@ -1,4 +1,7 @@
-<script src="https://cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+{{ if or .Site.Params.enableMathJax .Params.math }}
+{{ partial "math.html" . }}
+{{ end }}
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
 <script>
    window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
 </script>
@@ -6,7 +9,14 @@
 <script type="text/javascript" src="https://cdn.staticfile.org/highlight.js/9.15.10/languages/rust.min.js"></script>
 <script type="text/javascript"
    src="https://cdn.staticfile.org/highlight.js/9.15.10/languages/dockerfile.min.js"></script>
-<script>hljs.initHighlightingOnLoad();</script>
+<script>
+hljs.configure({
+  tabReplace: '    ', // 4 spaces
+  classPrefix: ''     // don't append class prefix
+                      // … other options aren't changed
+})
+hljs.initHighlightingOnLoad();
+</script>
 <script type="text/javascript" src="{{ "js/application.js" | absURL }}"></script>
 <script type="text/javascript" src="{{ "js/plugin.js" | absURL }}"></script>
 <script>
@@ -20,7 +30,7 @@
                   UNTITLED: '{{ T "insight_untitled"}}',
               },
               ROOT_URL: '{{ .Site.BaseURL }}',
-              CONTENT_URL: '{{ "/searchindex.json" | absURL }} ',
+              CONTENT_URL: '{{ print .Site.BaseURL "/searchindex.json" | safeURL }} ',
           };
           window.INSIGHT_CONFIG = INSIGHT_CONFIG;
       })(window);
@@ -33,7 +43,7 @@
 {{- if .IsPage }}
 {{- partial "_script/pv.html" . }}
 {{- end }}
-{{- if eq .Type "posts"   }}
+{{- if in $.Site.Params.mainSections .Type }}
 {{- partial "_script/comment.html" . }}
 {{- end }}
 {{- partial "_script/fancybox.html" . }}
